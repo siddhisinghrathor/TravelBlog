@@ -1,26 +1,43 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { cn } from "../../../ lib/utils.js";
 
-export const Card = ({ card, index, layout }) => {
+export const Card = ({ card, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: index * 0.1 }}
-      className={cn(
-        "relative w-[300px] md:w-[400px] h-[400px] md:h-[500px] bg-gray-800 text-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:z-10 transition-all duration-300",
-        layout && "absolute top-0 left-0"
-      )}
+      key={index}
+      className="relative rounded-xl overflow-hidden group"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.6, type: "spring" }}
     >
-      <img
-        src={card.src}
-        alt={card.title}
-        className="w-full h-2/3 object-cover"
-      />
-      <div className="p-4">
-        <p className="text-sm uppercase text-gray-400">{card.category}</p>
-        <h3 className="text-lg font-bold">{card.title}</h3>
+      {/* Animated Border */}
+      <div className="absolute inset-0 border-2 border-yellow-400 rounded-xl animate-borderGlow"></div>
+
+      {/* Card Content */}
+      <div className="relative z-10 bg-gray-800 rounded-xl shadow-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+        <img
+          src={card.src}
+          alt={card.title}
+          className="w-full h-48 object-cover"
+        />
+        <div className="p-4">
+          <h3 className="text-xl font-bold text-white">{card.title}</h3>
+          <p className="text-sm text-gray-300">{card.category}</p>
+        </div>
+        <div className="relative rounded-xl overflow-hidden group animate-borderGlow border-2 border-yellow-400">
+          {/* Card Content */}
+          <div className="relative z-10 bg-gray-800 rounded-xl shadow-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
+            <img
+              src={card.src}
+              alt={card.title}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-4">
+              <h3 className="text-xl font-bold text-white">{card.title}</h3>
+              <p className="text-sm text-gray-300">{card.category}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </motion.div>
   );

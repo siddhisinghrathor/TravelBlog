@@ -1,31 +1,33 @@
 import React from "react";
-import "./App.css";
-
-// Components
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import { AppleCardsCarouselDemo } from "./components/AppleCardsCarouselDemo";
 import Journal from "./components/Journal";
 import Footer from "./components/Footer";
+import JourneyDetail from "./components/JourneyDetail";
 
 function App() {
   return (
-    <div className="bg-black text-white  min-h-screen">
-      {/* Navbar Section */}
-      <Navbar />
-
-      {/* Hero Section */}
-      <Hero />
-
-      {/* Explore Section with Animated Stacked Cards */}
-      <AppleCardsCarouselDemo />
-
-      {/* Journal / Blog Posts Section */}
-      <Journal />
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    <Router>
+      <div className="bg-black text-white min-h-screen">
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <AppleCardsCarouselDemo />
+                <Journal />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/journey/:id" element={<JourneyDetail />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
